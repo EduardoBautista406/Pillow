@@ -1,9 +1,9 @@
 import * as React from 'react';
 
-export default function DetailView() {
+export default function CreatePost() {
     return (
         <>
-            detail view
+            create post
         </>
     );
 }
