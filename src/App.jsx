@@ -1,9 +1,7 @@
 import { useState } from "react";
 import Album from "./components/Album"
 import DetailView from "./components/DetailView"
-import AppBar from '@mui/material/AppBar';
-import Typography from '@mui/material/Typography';
-import Toolbar from '@mui/material/Toolbar';
+import Navbar from "./components/Navbar"
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./App.css";
 
@@ -12,14 +10,7 @@ function App() {
 
   return (
     <BrowserRouter>
-      <AppBar position="relative">
-        <Toolbar>
-          <Typography variant="h6" color="inherit" noWrap>
-            Pillow
-          </Typography>
-        </Toolbar>
-      </AppBar>
-
+      <Navbar />
       <Routes>
         <Route path="/*" element={<Album />} />
         <Route path="/detail" element={<DetailView />} />
