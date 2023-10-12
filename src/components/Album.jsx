@@ -52,8 +52,8 @@ export default function Album() {
               spacing={2}
               justifyContent="center"
             >
-              <Button variant="contained">Main call to action</Button>
-              <Button variant="outlined">Secondary action</Button>
+              <Button variant="contained" href='create'>Create Post</Button>
+              <Button variant="outlined">Sort by</Button>
             </Stack>
           </Container>
         </Box>
@@ -82,7 +82,7 @@ export default function Album() {
                     </Typography>
                   </CardContent>
                   <CardActions>
-                    <Button size="small">View</Button>
+                    <Button size="small" href='/detail'>View</Button>
                   </CardActions>
                 </Card>
               </Grid>
