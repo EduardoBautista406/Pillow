@@ -1,7 +1,7 @@
 import Navbar from "./components/Navbar"
 import Album from "./components/Album"
 import DetailView from "./components/DetailView"
-import CreatePost from "./components/CreatePost"
+import CreatePost from "./components/CreatePost/CreatePost"
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./App.css";
 
