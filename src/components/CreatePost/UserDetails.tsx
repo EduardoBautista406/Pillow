@@ -7,7 +7,7 @@ export default function UserDetails() {
     return (
         <React.Fragment>
             <Typography variant="h6" gutterBottom>
-                Posting address
+                Poster Detail
             </Typography>
             <Grid container spacing={3}>
                 <Grid item xs={12}>
