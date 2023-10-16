@@ -1,20 +1,23 @@
 import * as React from 'react';
 import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
+import UserDetails from './UserDetails';
 
-const user = [
-    { name: 'Name', detail: 'Jo Phan' },
-    { name: 'Email', detail: 'jojo@memail.com' },
-    { name: 'Phone', detail: '123456789' },
-];
-const housing = [
-    { name: 'Address', detail: '105 115 St Cleveland, OH' },
-    { name: 'Price', detail: '$1300/month' },
-    { name: 'Sqft', detail: '500' },
-    { name: 'Gender', detail: 'M' },
-];
 
-export default function Review() {
+
+const Review = ({user, housing}) => {
+    const userArray = [
+        { name: 'Name', detail: user.name },
+        { name: 'Email', detail: user.email },
+        { name: 'Phone', detail: user.phoneNumber },
+    ];
+    const housingArray = [
+        { name: 'Address', detail: housing.address1 + ' ' + housing.address2 },
+        { name: 'Price', detail: "$" + housing.price },
+        { name: 'Area', detail: housing.sqft + " sqft" },
+        { name: 'Gender', detail: housing.gender },
+    ];
+
     return (
         <React.Fragment>
             <Typography variant="h6" gutterBottom>
@@ -26,13 +29,13 @@ export default function Review() {
                         User details
                     </Typography>
                     <Grid container>
-                        {user.map((user) => (
-                            <React.Fragment>
+                        {userArray.map((userArray) => (
+                            <React.Fragment key={userArray.detail}>
                                 <Grid item xs={6}>
-                                    <Typography gutterBottom>{user.name}</Typography>
+                                    <Typography gutterBottom>{userArray.name}</Typography>
                                 </Grid>
                                 <Grid item xs={6}>
-                                    <Typography gutterBottom>{user.detail}</Typography>
+                                    <Typography gutterBottom>{userArray.detail}</Typography>
                                 </Grid>
                             </React.Fragment>
                         ))}
@@ -43,13 +46,13 @@ export default function Review() {
                         Housing details
                     </Typography>
                     <Grid container>
-                        {housing.map((housing) => (
-                            <React.Fragment key={user[1].detail}>
+                        {housingArray.map((housingArray) => (
+                            <React.Fragment key={housingArray.detail}>
                                 <Grid item xs={6}>
-                                    <Typography gutterBottom>{housing.name}</Typography>
+                                    <Typography gutterBottom>{housingArray.name}</Typography>
                                 </Grid>
                                 <Grid item xs={6}>
-                                    <Typography gutterBottom>{housing.detail}</Typography>
+                                    <Typography gutterBottom>{housingArray.detail}</Typography>
                                 </Grid>
                             </React.Fragment>
                         ))}
@@ -59,4 +62,5 @@ export default function Review() {
         </React.Fragment>
     );
 }
+export default Review;
 
