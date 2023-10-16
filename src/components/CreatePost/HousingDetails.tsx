@@ -108,6 +108,9 @@ const HousingDetails = ({ data, setData, errors }) => {
                     />
                     {errors.gender && <Typography color="error">{errors.gender}</Typography>}
                 </Grid>
+                <Grid item xs={12}>
+                    
+                </Grid>
             </Grid>
         </React.Fragment>
     );

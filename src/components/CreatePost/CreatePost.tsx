@@ -13,6 +13,7 @@ import UserDetails from './UserDetails';
 import HousingDetails from './HousingDetails';
 import Review from './Review';
 import { SupervisedUserCircle } from '@mui/icons-material';
+import { addUserDataToDatabase } from './PostBackend';
 
 const steps = ['User details', 'Housing details', 'Review your post'];
 
@@ -87,9 +88,7 @@ export default function CreatePost() {
             setHousingErrors(newErrors);
             return valid;
         }
-        // ... additional steps validations ...
     ];
-
 
     const handleNext = () => {
         if (activeStep === steps.length - 1) {
@@ -108,9 +107,16 @@ export default function CreatePost() {
         setActiveStep(activeStep - 1);
     };
 
-    const handlePost = async() => {
-        //TODO post to database 
-    }
+    const handlePost = async () => {
+        try {
+            const result = await addUserDataToDatabase(userData);
+            console.log(result);
+            // Navigate or show success message or any other action
+        } catch (error) {
+            console.error('Failed to add user data:', error);
+            // Handle the error, maybe show a user-friendly error message
+        }
+    };
     return (
         <Fragment>
             <CssBaseline />
