@@ -5,12 +5,8 @@ import Typography from '@mui/material/Typography';
 import CardActions from '@mui/material/CardActions';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
-import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import Paper from '@mui/material/Paper';
-import Stepper from '@mui/material/Stepper';
-import Step from '@mui/material/Step';
-import StepLabel from '@mui/material/StepLabel';
 
 export default function DetailView() {
     return (
@@ -41,7 +37,7 @@ export default function DetailView() {
                         </Typography>
                     </CardContent>
                     <CardActions>
-                        <Button variant="contained" href="mailto:ttp12@case.edu">
+                        <Button variant="contained" href="profile">
                             Contact
                         </Button>
                     </CardActions>
