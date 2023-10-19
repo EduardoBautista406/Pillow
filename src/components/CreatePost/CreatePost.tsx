@@ -25,10 +25,10 @@ type UserDataType = {
 
 export default function CreatePost() {
     const [userData, setUserData] = useState({name: '', email: '', phoneNumber: ''});
-    const [housingData, setHousingData] = useState({address1: '', address2: '', price: '', sqft: '', beds: '', baths: '', gender: ''});
+    const [housingData, setHousingData] = useState({address1: '', address2: '', price: '', sqft: '', beds: '', baths: '', gender: '', review: ''});
     const [activeStep, setActiveStep] = useState(0);
     const [errors, setErrors] = useState<UserDataType>({ name: '', email: '', phoneNumber: ''});
-    const [housingErrors, setHousingErrors] = useState({address1: '', address2: '', price: '', sqft: '', beds: '', baths: '', gender: ''})
+    const [housingErrors, setHousingErrors] = useState({address1: '', address2: '', price: '', sqft: '', beds: '', baths: '', gender: '', review: ''})
 
     function getStepContent(step: number) {
         switch (step) {
@@ -66,7 +66,7 @@ export default function CreatePost() {
         },
         () => {
             let valid = true;
-            let newErrors = { address1: '', address2: '', price: '', sqft: '', gender: '', beds: '', baths: ''};
+            let newErrors = { address1: '', address2: '', price: '', sqft: '', gender: '', beds: '', baths: '', review: ''};
             
             if (!housingData.address1) {
                 newErrors.address1 = 'Address is required.';
@@ -101,7 +101,7 @@ export default function CreatePost() {
     const handleNext = () => {
         if (activeStep === steps.length - 1) {
             alert("Insert success snackbar here");
-            handlePost();
+            addUserDataToDatabase(userData, housingData);
             window.location.href = '/';
         }
         else if (validations[activeStep]()) {
@@ -115,16 +115,6 @@ export default function CreatePost() {
         setActiveStep(activeStep - 1);
     };
 
-    const handlePost = async () => {
-        try {
-            const result = await addUserDataToDatabase(userData);
-            console.log(result);
-            // Navigate or show success message or any other action
-        } catch (error) {
-            console.error('Failed to add user data:', error);
-            // Handle the error, maybe show a user-friendly error message
-        }
-    };
     return (
         <Fragment>
             <CssBaseline />

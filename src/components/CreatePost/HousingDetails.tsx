@@ -5,7 +5,8 @@ import TextField from '@mui/material/TextField';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
-import Select, { SelectChangeEvent } from '@mui/material/Select';
+import Select from '@mui/material/Select';
+
 
 const HousingDetails = ({ data, setData, errors }) => {
 
@@ -46,7 +47,16 @@ const HousingDetails = ({ data, setData, errors }) => {
         }));
     };
     const handleGenderChange = (e) => {
-        setData(prevData => ({ ...prevData, gender: e.target.value as string }));
+        setData(prevData => ({ 
+            ...prevData, 
+            gender: e.target.value as string 
+        }));
+    };
+    const handleReviewChange = (e) => {
+        setData(prevData => ({ 
+            ...prevData, 
+            review: e.target.value
+        }));
     };
 
     return (
@@ -174,6 +184,7 @@ const HousingDetails = ({ data, setData, errors }) => {
                                 <MenuItem value="Agender">Agender</MenuItem>
                                 <MenuItem value="Androgynous">Androgynous</MenuItem>
                                 <MenuItem value="Bigender">Bigender</MenuItem>
+                                <MenuItem value="Pangender">Pangender</MenuItem>
                                 <MenuItem value="Non-binary">Non-binary</MenuItem>
                                 <MenuItem value="Fluid">Gender Fluid</MenuItem>
                                 <MenuItem value="Questioning">Gender Questioning</MenuItem>
@@ -194,7 +205,6 @@ const HousingDetails = ({ data, setData, errors }) => {
                                 <MenuItem value="MTF">MTF</MenuItem>
                                 <MenuItem value="Neither">Neither</MenuItem>
                                 <MenuItem value="Neutrois">Neutrois</MenuItem>
-                                <MenuItem value="Pangender">Pangender</MenuItem>
                                 <MenuItem value="Trans Person">Trans Person</MenuItem>
                                 <MenuItem value="Trans* Person">Trans* Person</MenuItem>
                                 <MenuItem value="Trans Woman">Trans Woman</MenuItem>
@@ -218,7 +228,15 @@ const HousingDetails = ({ data, setData, errors }) => {
                     </FormControl>
                 </Grid>
                 <Grid item xs={12}>
-                    
+                    <TextField
+                        id="description"
+                        label="Description"
+                        fullWidth
+                        multiline
+                        variant="standard"
+                        value={data.review || ''}
+                        onChange={handleReviewChange}
+                    />
                 </Grid>
             </Grid>
         </React.Fragment>
