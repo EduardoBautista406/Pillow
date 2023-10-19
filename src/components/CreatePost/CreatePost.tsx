@@ -25,10 +25,10 @@ type UserDataType = {
 
 export default function CreatePost() {
     const [userData, setUserData] = useState({name: '', email: '', phoneNumber: ''});
-    const [housingData, setHousingData] = useState({address1: '', address2: '', price: '', sqft: '', gender: ''});
+    const [housingData, setHousingData] = useState({address1: '', address2: '', price: '', sqft: '', beds: '', baths: '', gender: ''});
     const [activeStep, setActiveStep] = useState(0);
     const [errors, setErrors] = useState<UserDataType>({ name: '', email: '', phoneNumber: ''});
-    const [housingErrors, setHousingErrors] = useState({address1: '', address2: '', price: '', sqft: '', gender: ''})
+    const [housingErrors, setHousingErrors] = useState({address1: '', address2: '', price: '', sqft: '', beds: '', baths: '', gender: ''})
 
     function getStepContent(step: number) {
         switch (step) {
@@ -66,7 +66,7 @@ export default function CreatePost() {
         },
         () => {
             let valid = true;
-            let newErrors = { address1: '', address2: '', price: '', sqft: '', gender: ''};
+            let newErrors = { address1: '', address2: '', price: '', sqft: '', gender: '', beds: '', baths: ''};
             
             if (!housingData.address1) {
                 newErrors.address1 = 'Address is required.';
@@ -78,6 +78,14 @@ export default function CreatePost() {
             }
             if (!housingData.sqft) {
                 newErrors.sqft = 'Sqft is required.';
+                valid = false;
+            }
+            if (!housingData.beds) {
+                newErrors.beds = 'Beds are required.';
+                valid = false;
+            }
+            if (!housingData.baths) {
+                newErrors.baths = 'Bathrooms are required.';
                 valid = false;
             }
             if (!housingData.gender) {

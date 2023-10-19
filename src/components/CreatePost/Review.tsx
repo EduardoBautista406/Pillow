@@ -15,6 +15,8 @@ const Review = ({user, housing}) => {
         { name: 'Address', detail: housing.address1 + ' ' + housing.address2 },
         { name: 'Price', detail: "$" + housing.price },
         { name: 'Area', detail: housing.sqft + " sqft" },
+        { name: 'Beds', detail: housing.beds },
+        { name: 'Bathrooms', detail: housing.baths },
         { name: 'Gender', detail: housing.gender },
     ];
 

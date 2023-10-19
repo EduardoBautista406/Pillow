@@ -2,6 +2,10 @@ import * as React from 'react';
 import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
 import TextField from '@mui/material/TextField';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select, { SelectChangeEvent } from '@mui/material/Select';
 
 const HousingDetails = ({ data, setData, errors }) => {
 
@@ -29,11 +33,20 @@ const HousingDetails = ({ data, setData, errors }) => {
             sqft: e.target.value
         }));
     };
-    const handleGenderChange = (e) => {
+    const handleBedroomChange = (e) => {
         setData(prevData => ({
             ...prevData,
-            gender: e.target.value
-            }));
+            beds: e.target.value
+        }));
+    };
+    const handleBathroomChange = (e) => {
+        setData(prevData => ({
+            ...prevData,
+            baths: e.target.value
+        }));
+    };
+    const handleGenderChange = (e) => {
+        setData(prevData => ({ ...prevData, gender: e.target.value as string }));
     };
 
     return (
@@ -69,7 +82,7 @@ const HousingDetails = ({ data, setData, errors }) => {
                         onChange={handleAddress2Change}
                     />
                 </Grid>
-                <Grid item xs={12}>
+                <Grid item xs={6}>
                     <TextField
                         required
                         id="price"
@@ -82,7 +95,7 @@ const HousingDetails = ({ data, setData, errors }) => {
                     />
                     {errors.price && <Typography color="error">{errors.price}</Typography>}
                 </Grid>
-                <Grid item xs={12}>
+                <Grid item xs={6}>
                     <TextField
                         required
                         id="sqft"
@@ -95,18 +108,114 @@ const HousingDetails = ({ data, setData, errors }) => {
                     />
                     {errors.sqft && <Typography color="error">{errors.sqft}</Typography>}
                 </Grid>
-                <Grid item xs={12}>
-                    <TextField
-                        required
-                        id="gender"
-                        label="Gender"
-                        fullWidth
-                        variant="standard"
-                        value={data.gender || ''}
-                        onChange={handleGenderChange}
-                        error={errors.gender}
-                    />
-                    {errors.gender && <Typography color="error">{errors.gender}</Typography>}
+                <Grid item xs={4}>
+                <FormControl variant="standard" required fullWidth>
+                        <InputLabel id="beds">Beds</InputLabel>
+                            <Select
+                                labelId="beds"
+                                id="beds"
+                                value={data.beds || ''}
+                                onChange={handleBedroomChange}
+                                label="Beds"
+                                >
+                                    <MenuItem value={0}>0</MenuItem>
+                                    <MenuItem value={1}>1</MenuItem>
+                                    <MenuItem value={2}>2</MenuItem>
+                                    <MenuItem value={3}>3</MenuItem>
+                                    <MenuItem value={4}>4</MenuItem>
+                                    <MenuItem value={5}>5</MenuItem>
+                                    <MenuItem value={6}>6</MenuItem>
+                                    <MenuItem value={7}>7</MenuItem>
+                                    <MenuItem value={8}>8</MenuItem>
+                                    <MenuItem value={9}>9</MenuItem>
+                                    <MenuItem value={10}>10</MenuItem>
+                            </Select>
+                            {errors.beds && <Typography color="error">{errors.beds}</Typography>}
+                    </FormControl>
+                </Grid>
+                <Grid item xs={4}>
+                <FormControl variant="standard" required fullWidth>
+                        <InputLabel id="baths">Baths</InputLabel>
+                            <Select
+                                labelId="baths"
+                                id="baths"
+                                value={data.baths || ''}
+                                onChange={handleBathroomChange}
+                                label="Baths"
+                                >
+                                    <MenuItem value={0}>0</MenuItem>
+                                    <MenuItem value={1}>1</MenuItem>
+                                    <MenuItem value={2}>2</MenuItem>
+                                    <MenuItem value={3}>3</MenuItem>
+                                    <MenuItem value={4}>4</MenuItem>
+                                    <MenuItem value={5}>5</MenuItem>
+                                    <MenuItem value={6}>6</MenuItem>
+                                    <MenuItem value={7}>7</MenuItem>
+                                    <MenuItem value={8}>8</MenuItem>
+                                    <MenuItem value={9}>9</MenuItem>
+                                    <MenuItem value={10}>10</MenuItem>
+                            </Select>
+                            {errors.baths && <Typography color="error">{errors.baths}</Typography>}
+                    </FormControl>
+                </Grid>
+                <Grid item xs={4}>
+                    <FormControl variant="standard" required fullWidth>
+                        <InputLabel id="gender">Gender</InputLabel>
+                            <Select
+                            labelId="gender"
+                            id="gender"
+                            value={data.gender || ''}
+                            onChange={handleGenderChange}
+                            label="Gender"
+                            >
+                                <MenuItem value="Man">Man</MenuItem>
+                                <MenuItem value="Woman">Woman</MenuItem>
+                                <MenuItem value="Other">Other</MenuItem>
+                                <MenuItem value="Agender">Agender</MenuItem>
+                                <MenuItem value="Androgynous">Androgynous</MenuItem>
+                                <MenuItem value="Bigender">Bigender</MenuItem>
+                                <MenuItem value="Non-binary">Non-binary</MenuItem>
+                                <MenuItem value="Fluid">Gender Fluid</MenuItem>
+                                <MenuItem value="Questioning">Gender Questioning</MenuItem>
+                                <MenuItem value="Intersex">Intersex</MenuItem>
+                                <MenuItem value="Two-spirit">Two-spirit</MenuItem>
+                                <MenuItem value="Cis">Cis</MenuItem>
+                                <MenuItem value="Cisgender">Cisgender</MenuItem>
+                                <MenuItem value="Cis Female">Cis Female</MenuItem>
+                                <MenuItem value="Cis Male">Cis Male</MenuItem>
+                                <MenuItem value="Cisgender Female">Cisgender Female</MenuItem>
+                                <MenuItem value="Cisgender Male">Cisgender Male</MenuItem>
+                                <MenuItem value="Female to Male">Female to Male</MenuItem>
+                                <MenuItem value="FTM">FTM</MenuItem>
+                                <MenuItem value="Gender Nonconforming">Gender Nonconforming</MenuItem>
+                                <MenuItem value="Gender Variant">Gender Variant</MenuItem>
+                                <MenuItem value="Genderqueer">Genderqueer</MenuItem>
+                                <MenuItem value="Male to Female">Male to Female</MenuItem>
+                                <MenuItem value="MTF">MTF</MenuItem>
+                                <MenuItem value="Neither">Neither</MenuItem>
+                                <MenuItem value="Neutrois">Neutrois</MenuItem>
+                                <MenuItem value="Pangender">Pangender</MenuItem>
+                                <MenuItem value="Trans Person">Trans Person</MenuItem>
+                                <MenuItem value="Trans* Person">Trans* Person</MenuItem>
+                                <MenuItem value="Trans Woman">Trans Woman</MenuItem>
+                                <MenuItem value="Trans* Woman">Trans* Woman</MenuItem>
+                                <MenuItem value="Transfeminine">Transfeminine</MenuItem>
+                                <MenuItem value="Transgender">Transgender</MenuItem>
+                                <MenuItem value="Transgender Female">Transgender Female</MenuItem>
+                                <MenuItem value="Transgender Male">Transgender Male</MenuItem>
+                                <MenuItem value="Transgender Man">Transgender Man</MenuItem>
+                                <MenuItem value="Transgender Person">Transgender Person</MenuItem>
+                                <MenuItem value="Transgender Woman">Transgender Woman</MenuItem>
+                                <MenuItem value="Transmasculine">Transmasculine</MenuItem>
+                                <MenuItem value="Transsexual">Transsexual</MenuItem>
+                                <MenuItem value="Transsexual Female">Transsexual Female</MenuItem>
+                                <MenuItem value="Transsexual Male">Transsexual Male</MenuItem>
+                                <MenuItem value="Transsexual Man">Transsexual Man</MenuItem>
+                                <MenuItem value="Transsexual Person">Transsexual Person</MenuItem>
+                                <MenuItem value="Transsexual Woman">Transsexual Woman</MenuItem>
+                            </Select>
+                            {errors.gender && <Typography color="error">{errors.gender}</Typography>}
+                    </FormControl>
                 </Grid>
                 <Grid item xs={12}>
                     
