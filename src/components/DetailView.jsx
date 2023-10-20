@@ -65,7 +65,7 @@ export default function DetailView() {
                             </Typography>
                         </CardContent>
                         <CardActions>
-                            <Button variant="contained" href={listing.user}>
+                            <Button variant="contained" href='profile'>
                                 Contact
                             </Button>
                         </CardActions>

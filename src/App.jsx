@@ -14,7 +14,7 @@ function App() {
         <Route path="/*" element={<Album />} />
         <Route path="/detail/:listingId" element={<DetailView />} />
         <Route path="/create" element={<CreatePost />} />
-        <Route path="/profile" element={<Profile />} />
+        <Route path="/detail/profile" element={<Profile />} />
         {/* <Route path="/login" element={<Login />} /> */}
         {/* <Route path="/signin" element={<Signin />} /> */}
       </Routes>
