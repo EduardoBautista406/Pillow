@@ -73,6 +73,9 @@ export default function DetailView() {
                             <Typography fontWeight={'light'}>
                                     {listing.date.toDate().toString()}
                             </Typography>
+                            <Typography fontWeight={'light'}>
+                                    {listing.user}
+                            </Typography>
                         </CardContent>
                         
                     </Paper>

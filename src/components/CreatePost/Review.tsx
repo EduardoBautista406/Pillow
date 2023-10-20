@@ -12,7 +12,7 @@ const Review = ({user, housing}) => {
         { name: 'Phone', detail: user.phoneNumber },
     ];
     const housingArray = [
-        { name: 'Address', detail: housing.address1 + ' ' + housing.address2 },
+        { name: 'Address', detail: housing.address1},
         { name: 'Price', detail: "$" + housing.price },
         { name: 'Area', detail: housing.sqft + " sqft" },
         { name: 'Beds', detail: housing.beds },

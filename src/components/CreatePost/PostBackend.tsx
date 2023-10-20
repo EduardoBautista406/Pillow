@@ -13,7 +13,8 @@ export async function addUserDataToDatabase(userData, housingData, imageUrl) {
     // const dateString = `${month}/${day}/${year}`;
 
     await addDoc(listingsCollection, {
-        address: housingData.address1 + ' ' + housingData.address2,
+        address: housingData.address1,
+        line2: housingData.address2,
         date: serverTimestamp(),
         description: housingData.review,
         image: imageUrl,

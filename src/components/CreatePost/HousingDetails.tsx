@@ -66,6 +66,124 @@ const HousingDetails = ({ data, setData, errors }) => {
         }));
     };
 
+    const allGenders = [
+        "Abinary",
+        "Agender",
+        "Ambigender",
+        "Androgyne",
+        "Androgynos",
+        "Androgynous",
+        "Aporagender",
+        "Autigender",
+        "Bakla",
+        "Bigender",
+        "Binary",
+        "Bissu",
+        "Butch",
+        "Calabai",
+        "Calalai",
+        "Cis",
+        "Cisgender",
+        "Cis female",
+        "Cis male",
+        "Demi-boy",
+        "Demiflux",
+        "Demigender",
+        "Demi-girl",
+        "Demi-guy",
+        "Demi-man",
+        "Dual gender",
+        "Demi-woman",
+        "Endosex",
+        "Eunuch",
+        "Fa'afafine",
+        "Female",
+        "Female to Male",
+        "Femme",
+        "FTM",
+        "Gender bender",
+        "Gender diverse",
+        "Gender gifted",
+        "Genderfluid",
+        "Genderflux",
+        "Genderfuck",
+        "Genderless",
+        "Gendervague",
+        "Gender nonconforming",
+        "Genderqueer",
+        "Gender questioning",
+        "Gender variant",
+        "Graygender",
+        "Heterosexual",
+        "Hijra",
+        "Intergender",
+        "Intersex",
+        "Kathoey",
+        "Male",
+        "Male to female",
+        "Man of trans experience",
+        "Maverique",
+        "MTF",
+        "Multigender",
+        "Muxe",
+        "Neurogender",
+        "Neutrois",
+        "Non-binary",
+        "Non-binary transgender",
+        "Omnigender",
+        "Other",
+        "Pangender",
+        "Polygender",
+        "Person of transgendered experience",
+        "Queer",
+        "Sekhet",
+        "Straight",
+        "Third gender",
+        "Trans",
+        "Trans female",
+        "Trans male",
+        "Trans man",
+        "Trans person",
+        "Trans woman",
+        "Transgender",
+        "Transgender female",
+        "Transgender male",
+        "Transgender man",
+        "Transgender person",
+        "Transgender woman",
+        "Transfeminine",
+        "Transmasculine",
+        "Transsexual",
+        "Transsexual female",
+        "Transsexual male",
+        "Transsexual man",
+        "Transsexual person",
+        "Transsexual woman",
+        "Travesti",
+        "Trigender",
+        "Tumtum",
+        "Two-spirit",
+        "Vakasalewalewa",
+        "Waria",
+        "Winkte",
+        "Woman of trans experience",
+        "X-gender",
+        "Xenogender"
+    ];
+
+    const existingGenders = [
+        "Man",
+        "Woman",
+    ];
+
+    const newGenders = allGenders.filter(gender => !existingGenders.includes(gender));
+    const oldGenderOptions = existingGenders.map(gender => (
+        <MenuItem value={gender}>{gender}</MenuItem>
+    ));
+    const newGenderOptions = newGenders.map(gender => (
+        <MenuItem value={gender}>{gender}</MenuItem>
+    ));
+
     return (
         <React.Fragment>
             <Typography variant="h6" gutterBottom>
@@ -184,51 +302,8 @@ const HousingDetails = ({ data, setData, errors }) => {
                             onChange={handleGenderChange}
                             label="Gender"
                             >
-                                <MenuItem value="Man">Man</MenuItem>
-                                <MenuItem value="Woman">Woman</MenuItem>
-                                <MenuItem value="Other">Other</MenuItem>
-                                <MenuItem value="Agender">Agender</MenuItem>
-                                <MenuItem value="Androgynous">Androgynous</MenuItem>
-                                <MenuItem value="Bigender">Bigender</MenuItem>
-                                <MenuItem value="Pangender">Pangender</MenuItem>
-                                <MenuItem value="Non-binary">Non-binary</MenuItem>
-                                <MenuItem value="Gender Fluid">Gender Fluid</MenuItem>
-                                <MenuItem value="Gender Questioning">Gender Questioning</MenuItem>
-                                <MenuItem value="Intersex">Intersex</MenuItem>
-                                <MenuItem value="Two-spirit">Two-spirit</MenuItem>
-                                <MenuItem value="Cis">Cis</MenuItem>
-                                <MenuItem value="Cisgender">Cisgender</MenuItem>
-                                <MenuItem value="Cis Female">Cis Female</MenuItem>
-                                <MenuItem value="Cis Male">Cis Male</MenuItem>
-                                <MenuItem value="Cisgender Female">Cisgender Female</MenuItem>
-                                <MenuItem value="Cisgender Male">Cisgender Male</MenuItem>
-                                <MenuItem value="Female to Male">Female to Male</MenuItem>
-                                <MenuItem value="FTM">FTM</MenuItem>
-                                <MenuItem value="Gender Nonconforming">Gender Nonconforming</MenuItem>
-                                <MenuItem value="Gender Variant">Gender Variant</MenuItem>
-                                <MenuItem value="Genderqueer">Genderqueer</MenuItem>
-                                <MenuItem value="Male to Female">Male to Female</MenuItem>
-                                <MenuItem value="MTF">MTF</MenuItem>
-                                <MenuItem value="Neither">Neither</MenuItem>
-                                <MenuItem value="Neutrois">Neutrois</MenuItem>
-                                <MenuItem value="Trans Person">Trans Person</MenuItem>
-                                <MenuItem value="Trans* Person">Trans* Person</MenuItem>
-                                <MenuItem value="Trans Woman">Trans Woman</MenuItem>
-                                <MenuItem value="Trans* Woman">Trans* Woman</MenuItem>
-                                <MenuItem value="Transfeminine">Transfeminine</MenuItem>
-                                <MenuItem value="Transgender">Transgender</MenuItem>
-                                <MenuItem value="Transgender Female">Transgender Female</MenuItem>
-                                <MenuItem value="Transgender Male">Transgender Male</MenuItem>
-                                <MenuItem value="Transgender Man">Transgender Man</MenuItem>
-                                <MenuItem value="Transgender Person">Transgender Person</MenuItem>
-                                <MenuItem value="Transgender Woman">Transgender Woman</MenuItem>
-                                <MenuItem value="Transmasculine">Transmasculine</MenuItem>
-                                <MenuItem value="Transsexual">Transsexual</MenuItem>
-                                <MenuItem value="Transsexual Female">Transsexual Female</MenuItem>
-                                <MenuItem value="Transsexual Male">Transsexual Male</MenuItem>
-                                <MenuItem value="Transsexual Man">Transsexual Man</MenuItem>
-                                <MenuItem value="Transsexual Person">Transsexual Person</MenuItem>
-                                <MenuItem value="Transsexual Woman">Transsexual Woman</MenuItem>
+                                {oldGenderOptions}
+                                {newGenderOptions}
                             </Select>
                             {errors.gender && <Typography color="error">{errors.gender}</Typography>}
                     </FormControl>
