@@ -14,6 +14,7 @@ import HousingDetails from './HousingDetails';
 import Review from './Review';
 import { SupervisedUserCircle } from '@mui/icons-material';
 import { addUserDataToDatabase } from './PostBackend';
+import { getAddressImage } from './PostBackend';
 
 const steps = ['User details', 'Housing details', 'Review your post'];
 
@@ -100,8 +101,17 @@ export default function CreatePost() {
 
     const handleNext = () => {
         if (activeStep === steps.length - 1) {
-            addUserDataToDatabase(userData, housingData);
-            window.location.href = '/';
+            let url = '';
+            getAddressImage(housingData.address1)
+            .then(imageUrl => {
+                console.log(imageUrl); // You can use this URL in an <img> tag to display the image
+                url = imageUrl;
+                addUserDataToDatabase(userData, housingData, url);
+                window.location.href = '/';
+            })
+            .catch(error => {
+                console.error(error);
+            });
         }
         else if (validations[activeStep]()) {
             setActiveStep(activeStep + 1);

@@ -2,7 +2,7 @@ import { collection, getDocs, addDoc, serverTimestamp } from 'firebase/firestore
 import { db, doc, getDoc } from '../../firebase';
 
 
-export async function addUserDataToDatabase(userData, housingData) {
+export async function addUserDataToDatabase(userData, housingData, imageUrl) {
     const listingsCollection = collection(db, 'listings');
 
     // Convert current date to a string in the format "m/dd/yyyy"
@@ -16,7 +16,7 @@ export async function addUserDataToDatabase(userData, housingData) {
         address: housingData.address1 + ' ' + housingData.address2,
         date: serverTimestamp(),
         description: housingData.review,
-        image: "null",
+        image: imageUrl,
         preferences: housingData.gender,
         price: housingData.price,
         sqft: housingData.sqft,
@@ -72,6 +72,24 @@ export async function getListingDataFromDatabase() {
         }
       }
     });
+  }
+
+  export async function getAddressImage(address) {
+    const GEOCODING_ENDPOINT = `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(address)}&key=AIzaSyBCQwDmL-auS8BvrMOswmBUp_Xy91WfGaQ`;
+  
+    const response = await fetch(GEOCODING_ENDPOINT);
+    const data = await response.json();
+  
+    if (data.results && data.results[0] && data.results[0].geometry && data.results[0].geometry.location) {
+      const { lat, lng } = data.results[0].geometry.location;
+  
+      // Construct the Street View URL
+      const STREET_VIEW_ENDPOINT = `https://maps.googleapis.com/maps/api/streetview?size=600x600&location=${lat},${lng}&key=AIzaSyBCQwDmL-auS8BvrMOswmBUp_Xy91WfGaQ`;
+      
+      return STREET_VIEW_ENDPOINT; // This URL will display the image for the given address
+    } else {
+      throw new Error("Unable to retrieve image for the given address.");
+    }
   }
 
 /*

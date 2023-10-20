@@ -44,7 +44,7 @@ export default function DetailView() {
                                 // 16:9
                                 pt: '100%',
                             }}
-                            image="https://source.unsplash.com/random?wallpapers"
+                            image={listing.image ? listing.image : "https://source.unsplash.com/random"}
                         />
                         <CardContent sx={{ flexGrow: 1 }}>
                             <Typography gutterBottom variant="h5" component="h2">
