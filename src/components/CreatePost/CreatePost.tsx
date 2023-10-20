@@ -100,7 +100,6 @@ export default function CreatePost() {
 
     const handleNext = () => {
         if (activeStep === steps.length - 1) {
-            alert("Insert success snackbar here");
             addUserDataToDatabase(userData, housingData);
             window.location.href = '/';
         }

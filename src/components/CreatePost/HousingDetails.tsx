@@ -6,6 +6,7 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
+import AutocompleteTextField from './AutocompleteTextField';
 
 
 const HousingDetails = ({ data, setData, errors }) => {
@@ -16,6 +17,12 @@ const HousingDetails = ({ data, setData, errors }) => {
             address1: e.target.value
         }));
     };
+    const handlePlaceSelected = (place: google.maps.places.PlaceResult) => {
+        setData(prevData => ({
+            ...prevData,
+            address1: place.formatted_address
+        }));
+    }
     const handleAddress2Change = (e) => {
         setData(prevData => ({
             ...prevData,
@@ -66,16 +73,15 @@ const HousingDetails = ({ data, setData, errors }) => {
             </Typography>
             <Grid container spacing={3}>
                 <Grid item xs={12}>
-                    <TextField
-                        required
+                    <AutocompleteTextField 
                         id="address1"
                         name="address1"
-                        label="Address line 1"
+                        label="Address line 1 *"
                         fullWidth
-                        autoComplete="address-line1"
                         variant="standard"
-                        value={data.address1 || ''}
                         onChange={handleAddress1Change}
+                        onPlaceSelected={handlePlaceSelected} 
+                        value={data.address1 || ''}
                         error={errors.address1}
                     />
                     {errors.address1 && <Typography color="error">{errors.address1}</Typography>}
