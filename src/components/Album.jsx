@@ -12,20 +12,14 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { db, collection } from '../firebase';
-import { getDocs } from 'firebase/firestore';
 import { getListingDataFromDatabase, sortByDate } from './CreatePost/PostBackend';
 
-
-const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
 // TODO remove, this demo shouldn't need to reset the theme.
 const defaultTheme = createTheme();
 
 export default function Album() {
   const [listingList, setListingList] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const listingCollection = collection(db, 'listings');
 
   useEffect(() => {
     fetchListings();
@@ -97,7 +91,12 @@ export default function Album() {
                     image="https://source.unsplash.com/random?wallpapers"
                   />
                   <CardContent sx={{ flexGrow: 1 }}>
-                    <Typography gutterBottom variant="h5" component="h2">
+                    <Typography gutterBottom variant="h5" component="h2"
+                      style={{
+                        whiteSpace: 'nowrap',
+                        overflow: 'hidden',
+                        textOverflow: 'ellipsis',
+                      }} >
                       {listingList.address}
                     </Typography>
                     <Typography fontWeight={'light'} >
@@ -111,7 +110,7 @@ export default function Album() {
                     </Typography>
                   </CardContent>
                   <CardActions>
-                    <Button size="small" href='/detail'>View</Button>
+                    <Button size="small" href={`/detail/${listingList.id}`}>View</Button>
                   </CardActions>
                 </Card>
               </Grid>

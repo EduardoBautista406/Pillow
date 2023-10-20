@@ -1,5 +1,5 @@
 import { collection, getDocs, addDoc, serverTimestamp } from 'firebase/firestore';
-import { auth, storage, db, uploadString, ref, getDownloadURL } from '../../firebase';
+import { db, doc, getDoc } from '../../firebase';
 
 
 export async function addUserDataToDatabase(userData, housingData) {
@@ -10,7 +10,7 @@ export async function addUserDataToDatabase(userData, housingData) {
     const day = String(today.getDate()).padStart(2, '0');
     const month = String(today.getMonth() + 1).padStart(2, '0');
     const year = today.getFullYear();
-    const dateString = `${month}/${day}/${year}`;
+    // const dateString = `${month}/${day}/${year}`;
 
     await addDoc(listingsCollection, {
         address: housingData.address1 + ' ' + housingData.address2,
@@ -40,6 +40,16 @@ export async function getListingDataFromDatabase() {
       console.error("Error fetching listing data, " + error);
     }
   };
+
+  export function getListingById(listingId) {
+    const docRef = doc(db, 'listings', listingId);
+    try {
+        const listingData = getDoc(docRef);    
+        return listingData;
+    } catch (error) {
+        console.error("Error fetching listing data, " + error);
+    }
+  }
 
   export function sortByDate(listingData) {
     return listingData.sort(function(a, b) {

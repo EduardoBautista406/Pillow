@@ -11,7 +11,7 @@ function App() {
       <Navbar />
       <Routes>
         <Route path="/*" element={<Album />} />
-        <Route path="/detail" element={<DetailView />} />
+        <Route path="/detail/:listingId" element={<DetailView />} />
         <Route path="/create" element={<CreatePost />} />
         {/* <Route path="/login" element={<Login />} /> */}
         {/* <Route path="/signin" element={<Signin />} /> */}
