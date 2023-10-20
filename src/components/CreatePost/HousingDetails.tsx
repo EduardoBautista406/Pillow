@@ -186,8 +186,8 @@ const HousingDetails = ({ data, setData, errors }) => {
                                 <MenuItem value="Bigender">Bigender</MenuItem>
                                 <MenuItem value="Pangender">Pangender</MenuItem>
                                 <MenuItem value="Non-binary">Non-binary</MenuItem>
-                                <MenuItem value="Fluid">Gender Fluid</MenuItem>
-                                <MenuItem value="Questioning">Gender Questioning</MenuItem>
+                                <MenuItem value="Gender Fluid">Gender Fluid</MenuItem>
+                                <MenuItem value="Gender Questioning">Gender Questioning</MenuItem>
                                 <MenuItem value="Intersex">Intersex</MenuItem>
                                 <MenuItem value="Two-spirit">Two-spirit</MenuItem>
                                 <MenuItem value="Cis">Cis</MenuItem>

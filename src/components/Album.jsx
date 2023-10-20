@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useState, useEffect } from 'react';
 import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
@@ -11,6 +12,9 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { db, collection } from '../firebase';
+import { getDocs } from 'firebase/firestore';
+import { getListingDataFromDatabase, sortByDate } from './CreatePost/PostBackend';
 
 
 const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
@@ -19,6 +23,25 @@ const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 const defaultTheme = createTheme();
 
 export default function Album() {
+  const [listingList, setListingList] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const listingCollection = collection(db, 'listings');
+
+  useEffect(() => {
+    fetchListings();
+  }, []);
+
+  const fetchListings = async () => {
+    try {
+      const listings = await getListingDataFromDatabase();
+      setListingList(sortByDate(listings));
+      console.log(listings);
+    } catch (error) {
+      console.error("Failed to fetch listings:", error);
+    }
+  }
+
+
   return (
     <ThemeProvider theme={defaultTheme}>
       <CssBaseline />
@@ -60,8 +83,8 @@ export default function Album() {
         <Container sx={{ py: 8 }} maxWidth="md">
           {/* End hero unit */}
           <Grid container spacing={4}>
-            {cards.map((card) => (
-              <Grid item key={card} xs={12} sm={6} md={4}>
+            {listingList.map((listingList) => (
+              <Grid item key={listingList.id} xs={12} sm={6} md={4}>
                 <Card
                   sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}
                 >
@@ -75,10 +98,16 @@ export default function Album() {
                   />
                   <CardContent sx={{ flexGrow: 1 }}>
                     <Typography gutterBottom variant="h5" component="h2">
-                      1611 E 115th St
+                      {listingList.address}
                     </Typography>
-                    <Typography>
-                      2 beds, 2 bathrooms, Male
+                    <Typography fontWeight={'light'} >
+                      {listingList.bedrooms} beds, {listingList.bathrooms} bathrooms
+                    </Typography>
+                    <Typography fontWeight={'light'}>
+                      {listingList.preferences}
+                    </Typography>
+                    <Typography fontWeight={'500'}>
+                      ${listingList.price} / month
                     </Typography>
                   </CardContent>
                   <CardActions>

@@ -26,6 +26,44 @@ export async function addUserDataToDatabase(userData, housingData) {
       });    
 }
 
+export async function getListingDataFromDatabase() {
+    const listingsCollection = collection(db, 'listings');
+    try {
+      const listingData = await getDocs(listingsCollection);
+
+      const filteredData = listingData.docs.map((doc) => ({
+        ...doc.data(),
+        id: doc.id,
+      }));
+        return filteredData;
+    } catch (error) {
+      console.error("Error fetching listing data, " + error);
+    }
+  };
+
+  export function sortByDate(listingData) {
+    return listingData.sort(function(a, b) {
+      var aSeconds = a.date.seconds;
+      var bSeconds = b.date.seconds;
+      var aNanoseconds = a.date.nanoseconds;
+      var bNanoseconds = b.date.nanoseconds;
+  
+      if (aSeconds > bSeconds) {
+        return -1;
+      } else if (aSeconds < bSeconds) {
+        return 1;
+      } else {
+        if (aNanoseconds > bNanoseconds) {
+          return -1;
+        } else if (aNanoseconds < bNanoseconds) {
+          return 1;
+        } else {
+          return 0;
+        }
+      }
+    });
+  }
+
 /*
     try {
         const response = await fetch('https://your-api-endpoint.com/addUser', {
