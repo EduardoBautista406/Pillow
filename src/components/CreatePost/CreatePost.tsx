@@ -13,6 +13,7 @@ import UserDetails from './UserDetails';
 import HousingDetails from './HousingDetails';
 import Review from './Review';
 import { SupervisedUserCircle } from '@mui/icons-material';
+import { addUserDataToDatabase } from './PostBackend';
 
 const steps = ['User details', 'Housing details', 'Review your post'];
 
@@ -24,10 +25,10 @@ type UserDataType = {
 
 export default function CreatePost() {
     const [userData, setUserData] = useState({name: '', email: '', phoneNumber: ''});
-    const [housingData, setHousingData] = useState({address1: '', address2: '', price: '', sqft: '', gender: ''});
+    const [housingData, setHousingData] = useState({address1: '', address2: '', price: '', sqft: '', beds: '', baths: '', gender: '', review: ''});
     const [activeStep, setActiveStep] = useState(0);
     const [errors, setErrors] = useState<UserDataType>({ name: '', email: '', phoneNumber: ''});
-    const [housingErrors, setHousingErrors] = useState({address1: '', address2: '', price: '', sqft: '', gender: ''})
+    const [housingErrors, setHousingErrors] = useState({address1: '', address2: '', price: '', sqft: '', beds: '', baths: '', gender: '', review: ''})
 
     function getStepContent(step: number) {
         switch (step) {
@@ -65,7 +66,7 @@ export default function CreatePost() {
         },
         () => {
             let valid = true;
-            let newErrors = { address1: '', address2: '', price: '', sqft: '', gender: ''};
+            let newErrors = { address1: '', address2: '', price: '', sqft: '', gender: '', beds: '', baths: '', review: ''};
             
             if (!housingData.address1) {
                 newErrors.address1 = 'Address is required.';
@@ -79,6 +80,14 @@ export default function CreatePost() {
                 newErrors.sqft = 'Sqft is required.';
                 valid = false;
             }
+            if (!housingData.beds) {
+                newErrors.beds = 'Beds are required.';
+                valid = false;
+            }
+            if (!housingData.baths) {
+                newErrors.baths = 'Bathrooms are required.';
+                valid = false;
+            }
             if (!housingData.gender) {
                 newErrors.gender = 'Gender is required';
                 valid = false;
@@ -87,14 +96,12 @@ export default function CreatePost() {
             setHousingErrors(newErrors);
             return valid;
         }
-        // ... additional steps validations ...
     ];
-
 
     const handleNext = () => {
         if (activeStep === steps.length - 1) {
             alert("Insert success snackbar here");
-            handlePost();
+            addUserDataToDatabase(userData, housingData);
             window.location.href = '/';
         }
         else if (validations[activeStep]()) {
@@ -108,9 +115,6 @@ export default function CreatePost() {
         setActiveStep(activeStep - 1);
     };
 
-    const handlePost = async() => {
-        //TODO post to database 
-    }
     return (
         <Fragment>
             <CssBaseline />
