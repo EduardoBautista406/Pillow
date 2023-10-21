@@ -1,5 +1,6 @@
 import { collection, getDocs, addDoc, serverTimestamp } from 'firebase/firestore';
 import { db, doc, getDoc } from '../../firebase';
+import { MAPS_API_KEY } from '../../Backend/api_key';
 
 
 export async function addUserDataToDatabase(userData, housingData, imageUrl) {
@@ -76,7 +77,7 @@ export async function getListingDataFromDatabase() {
   }
 
   export async function getAddressImage(address) {
-    const GEOCODING_ENDPOINT = `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(address)}&key=AIzaSyBCQwDmL-auS8BvrMOswmBUp_Xy91WfGaQ`;
+    const GEOCODING_ENDPOINT = `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(address)}&key=${MAPS_API_KEY}`;
   
     const response = await fetch(GEOCODING_ENDPOINT);
     const data = await response.json();
@@ -85,7 +86,7 @@ export async function getListingDataFromDatabase() {
       const { lat, lng } = data.results[0].geometry.location;
   
       // Construct the Street View URL
-      const STREET_VIEW_ENDPOINT = `https://maps.googleapis.com/maps/api/streetview?size=600x600&location=${lat},${lng}&key=AIzaSyBCQwDmL-auS8BvrMOswmBUp_Xy91WfGaQ`;
+      const STREET_VIEW_ENDPOINT = `https://maps.googleapis.com/maps/api/streetview?size=600x600&location=${lat},${lng}&key=${MAPS_API_KEY}`;
       
       return STREET_VIEW_ENDPOINT; // This URL will display the image for the given address
     } else {
