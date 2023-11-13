@@ -2,7 +2,6 @@ import { collection, getDocs, addDoc, serverTimestamp } from 'firebase/firestore
 import { db, doc, getDoc } from '../../firebase';
 import { MAPS_API_KEY } from '../../Backend/api_key';
 
-
 export async function addUserDataToDatabase(userData, housingData, imageUrl) {
     const listingsCollection = collection(db, 'listings');
 
@@ -26,6 +25,8 @@ export async function addUserDataToDatabase(userData, housingData, imageUrl) {
         bathrooms: housingData.baths,
         user: userData.email,
       });    
+      console.log("Successfully added listing to database.");
+      window.location.href = '/';
 }
 
 export async function getListingDataFromDatabase() {

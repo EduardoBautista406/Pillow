@@ -101,14 +101,10 @@ export default function CreatePost() {
 
     const handleNext = () => {
         if (activeStep === steps.length - 1) {
-            let url = '';
-            alert("insert cool uploading animation here");
             getAddressImage(housingData.address1)
             .then(imageUrl => {
                 console.log(imageUrl); // You can use this URL in an <img> tag to display the image
-                url = imageUrl;
-                addUserDataToDatabase(userData, housingData, url);
-                window.location.href = '/';
+                addUserDataToDatabase(userData, housingData, imageUrl);
             })
             .catch(error => {
                 console.error(error);

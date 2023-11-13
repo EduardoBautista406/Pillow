@@ -6,7 +6,6 @@ import { getDocs, getFirestore, collection, addDoc, doc, setDoc, getDoc, updateD
 import { getStorage, ref, uploadString, getDownloadURL } from 'firebase/storage';
 import { FIREBASE_API } from "./Backend/api_key";
 
-
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
