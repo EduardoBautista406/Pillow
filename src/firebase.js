@@ -4,7 +4,7 @@ import { getAnalytics } from "firebase/analytics";
 import { getAuth } from 'firebase/auth';
 import { getDocs, getFirestore, collection, addDoc, doc, setDoc, getDoc, updateDoc} from 'firebase/firestore';
 import { getStorage, ref, uploadString, getDownloadURL } from 'firebase/storage';
-
+import { FIREBASE_API } from "./Backend/api_key";
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -12,7 +12,7 @@ import { getStorage, ref, uploadString, getDownloadURL } from 'firebase/storage'
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-  apiKey: "AIzaSyBvDDryFaJ2fAqkjEi8Va_UCm9JxOkL5iQ",
+  apiKey: FIREBASE_API,
   authDomain: "pillowcwru.firebaseapp.com",
   projectId: "pillowcwru",
   storageBucket: "pillowcwru.appspot.com",

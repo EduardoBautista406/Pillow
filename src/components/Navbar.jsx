@@ -13,6 +13,7 @@ export default function Navbar() {
                         Pillow
                     </Typography>
                 </Button>
+                
             </Toolbar>
         </AppBar>
     );
