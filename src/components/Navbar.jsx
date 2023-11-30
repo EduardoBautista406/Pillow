@@ -8,7 +8,7 @@ export default function Navbar() {
     return (
         <AppBar position="relative">
             <Toolbar>
-                <Button href="/">
+                <Button href="/album">
                     <Typography variant="h6" color="white" noWrap>
                         Pillow
                     </Typography>

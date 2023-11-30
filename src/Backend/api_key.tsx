@@ -1,0 +1,2 @@
+export const MAPS_API_KEY = "INSERT_MAPS_API_KEY"
+export const FIREBASE_API = "INSERT_FIREBASE_API_KEY"
