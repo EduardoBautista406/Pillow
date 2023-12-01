@@ -9,9 +9,11 @@ import CssBaseline from '@mui/material/CssBaseline';
 import Container from '@mui/material/Container';
 import Paper from '@mui/material/Paper';
 import Avatar from '@mui/material/Avatar';
+import { useNavigate } from 'react-router-dom';
 
 function Profile() {
   const [user, setUser] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((currentUser) => {
@@ -21,7 +23,16 @@ function Profile() {
     return () => unsubscribe();
   }, []);
 
-  // If user is not logged in, render a loading state or redirect to login
+  const handleLogout = () => {
+    auth.signOut().then(() => {
+      // Redirect to the login page after successful logout
+      navigate('/login');
+    }).catch((error) => {
+      console.error('Logout error:', error);
+    });
+  };
+
+  // If the user is not logged in, render a loading state or redirect to login
   if (!user) {
     return <div>Loading...</div>;
   }
@@ -43,7 +54,7 @@ function Profile() {
   return (
     <Container component="main" maxWidth="sm">
       <CssBaseline />
-      <Paper elevation={3} style={{ padding: '20px', marginTop: '20px' }}>
+      <Paper elevation={3} style={{ padding: '20px', marginTop: '20px', position: 'relative' }}>
         <div style={{ display: 'flex', justifyContent: 'center' }}>
           <Avatar
             alt="User Profile Picture"
@@ -75,6 +86,11 @@ function Profile() {
             </CardActions>
           </Paper>
         ))}
+      </div>
+      <div style={{ position: 'fixed', bottom: '10px', right: '10px' }}>
+        <Button variant="outlined" color="primary" onClick={handleLogout}>
+          Logout
+        </Button>
       </div>
     </Container>
   );
