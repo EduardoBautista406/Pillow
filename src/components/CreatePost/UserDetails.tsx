@@ -10,13 +10,7 @@ const UserDetails = ({ data, setData, errors }) => {
             ...prevData,
             name: e.target.value
         }));
-    };
-    const handlePhoneChange = (e) => {
-        setData(prevData => ({
-            ...prevData,
-            phoneNumber: e.target.value
-        }));
-    };
+    }
     const handleEmailChange = (e) => {
         setData(prevData => ({
             ...prevData,
@@ -43,21 +37,6 @@ const UserDetails = ({ data, setData, errors }) => {
                         error={errors.name}
                     />
                     {errors.name && <Typography color="error">{errors.name}</Typography>}
-                </Grid>
-                <Grid item xs={12}>
-                    <TextField
-                        required
-                        id="phoneNumber"
-                        name="phoneNumber"
-                        label="Phone number"
-                        fullWidth
-                        variant="standard"
-                        value={data.phoneNumber || ''}
-                        onChange={handlePhoneChange}
-                        error={errors.phoneNumber}
-                    />
-                    {errors.phoneNumber && <Typography color="error">{errors.phoneNumber}</Typography>}
-
                 </Grid>
                 <Grid item xs={12}>
                     <TextField

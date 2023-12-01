@@ -14,6 +14,7 @@ function App() {
       <Navbar />
       <Routes>
         <Route path="/*" element={<SignIn />} />
+        <Route path="/prf" element={<Profile />} />
         <Route path="/New User" element={<SignUp />} />
         <Route path="/album" element={<Album />} />
         <Route path="/detail/album" element={<Album />} />
