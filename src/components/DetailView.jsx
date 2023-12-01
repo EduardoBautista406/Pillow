@@ -15,6 +15,16 @@ export default function DetailView() {
     const { listingId } = useParams();
     const [listing, setListing] = useState(null);
 
+    const handleContactClick = () => {
+        const emailSubject = `Regarding the listing at ${listing.address}`;
+        const emailBody = `Hi,\n\nI'm interested in the listing at ${listing.address}. Could you please provide more information?\n\nThank you.`;
+
+        const mailtoLink = `mailto:${listing.userEmail}?subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}`;
+
+        // Open default email client
+        window.location.href = mailtoLink;
+    };
+
     useEffect(() => {
         const fetchListingId = async () => {
             try {
@@ -65,7 +75,7 @@ export default function DetailView() {
                             </Typography>
                         </CardContent>
                         <CardActions>
-                            <Button variant="contained" href='profile'>
+                            <Button variant="contained" onClick={handleContactClick}>
                                 Contact
                             </Button>
                         </CardActions>
