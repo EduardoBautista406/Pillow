@@ -12,7 +12,6 @@ export default function Navbar() {
     const navigate = useNavigate();
 
     const handleAlbumClick = () => {
-        // Check if the user is authenticated before redirecting to "/album"
         if (auth.currentUser) {
             navigate('/album');
         } else {

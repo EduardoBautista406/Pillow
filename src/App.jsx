@@ -21,8 +21,6 @@ function App() {
         <Route path="/detail/:listingId" element={<DetailView />} />
         <Route path="/create" element={<CreatePost />} />
         <Route path="/detail/profile" element={<Profile />} />
-        {/* <Route path="/login" element={<Login />} /> */}
-        {/* <Route path="/signin" element={<Signin />} /> */}
       </Routes>
     </BrowserRouter>
   );

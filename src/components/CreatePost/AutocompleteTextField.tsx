@@ -19,8 +19,8 @@ const AutocompleteTextField: React.FC<Props> = ({ onPlaceSelected, onChange, val
   const inputRef = useRef<HTMLInputElement>(null);
   const autocompleteRef = useRef<google.maps.places.Autocomplete | null>(null);
   const clevelandBounds = new google.maps.LatLngBounds(
-    new google.maps.LatLng(41.390150, -81.878399), // southwest corner
-    new google.maps.LatLng(41.602058, -81.545192)  // northeast corner
+    new google.maps.LatLng(41.390150, -81.878399), 
+    new google.maps.LatLng(41.602058, -81.545192)  
   );
 
   useEffect(() => {
@@ -28,8 +28,8 @@ const AutocompleteTextField: React.FC<Props> = ({ onPlaceSelected, onChange, val
     if (autocompleteRef.current) return;  
     
     const autocomplete = new google.maps.places.Autocomplete(inputRef.current, {
-        types: ['address'], // restrict results to addresses
-        bounds: clevelandBounds, // restrict results to Cleveland
+        types: ['address'], 
+        bounds: clevelandBounds, 
         strictBounds: true,
     });
     autocompleteRef.current = autocomplete;

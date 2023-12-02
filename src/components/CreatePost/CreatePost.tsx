@@ -52,10 +52,10 @@ export default function CreatePost() {
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
       if (user) {
-        // User is signed in, update the state with user data
+        
         setUserData({ name: user.displayName || '', email: user.email || '' });
       } else {
-        // User is signed out, reset the state
+        
         setUserData({ name: '', email: '' });
       }
     });
@@ -144,12 +144,11 @@ export default function CreatePost() {
           console.log(imageUrl);
           addUserDataToDatabase(userData, housingData, imageUrl)
             .then(() => {
-              // Check if the user is authenticated before navigating
+              
               if (auth.currentUser) {
                 navigate("/album");
               } else {
-                // Redirect to the sign-in page or handle authentication accordingly
-                // Example: navigate("/signin");
+                
               }
             })
             .catch((error) => {

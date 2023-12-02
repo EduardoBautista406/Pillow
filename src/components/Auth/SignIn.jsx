@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../firebase";
-import { useNavigate } from "react-router-dom"; // Import useNavigate
+import { useNavigate } from "react-router-dom"; 
 import Paper from "@mui/material/Paper";
 import Avatar from "@mui/material/Avatar";
 import { ToastContainer, toast } from "react-toastify";
@@ -14,7 +14,7 @@ import Button from "@mui/material/Button";
 const SignIn = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const navigate = useNavigate(); // Initialize useNavigate
+  const navigate = useNavigate();
 
   const signIn = (e) => {
     e.preventDefault();

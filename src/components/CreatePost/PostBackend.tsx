@@ -5,12 +5,12 @@ import { MAPS_API_KEY } from '../../Backend/api_key';
 export async function addUserDataToDatabase(userData, housingData, imageUrl) {
     const listingsCollection = collection(db, 'listings');
 
-    // Convert current date to a string in the format "m/dd/yyyy"
+    
     const today = new Date();
     const day = String(today.getDate()).padStart(2, '0');
     const month = String(today.getMonth() + 1).padStart(2, '0');
     const year = today.getFullYear();
-    // const dateString = `${month}/${day}/${year}`;
+   
 
     await addDoc(listingsCollection, {
         address: housingData.address1,
@@ -86,32 +86,11 @@ export async function getListingDataFromDatabase() {
     if (data.results && data.results[0] && data.results[0].geometry && data.results[0].geometry.location) {
       const { lat, lng } = data.results[0].geometry.location;
   
-      // Construct the Street View URL
+      
       const STREET_VIEW_ENDPOINT = `https://maps.googleapis.com/maps/api/streetview?size=600x600&location=${lat},${lng}&key=${MAPS_API_KEY}`;
       
-      return STREET_VIEW_ENDPOINT; // This URL will display the image for the given address
+      return STREET_VIEW_ENDPOINT; 
     } else {
       throw new Error("Unable to retrieve image for the given address.");
     }
   }
-
-/*
-    try {
-        const response = await fetch('https://your-api-endpoint.com/addUser', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(userData)
-        });
-
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
-        }
-
-        const data = await response.json();
-        return data;
-    } catch (error) {
-        console.error('There was a problem with the fetch operation:', error.message);
-    }
-    */

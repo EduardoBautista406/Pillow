@@ -46,24 +46,24 @@ const SignUp = () => {
     e.preventDefault();
 
     try {
-      // Create user with email and password
+
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
 
-      // Update user display name
+      
       await updateProfile(userCredential.user, { displayName: name });
 
-      // Add user data to Firestore
+      
       const userDocRef = doc(db, 'User', userCredential.user.uid);
       await setDoc(userDocRef, {
         name,
         email,
         gender,
         year,
-        // Add other fields as needed
+        
       });
 
       toast.success('Account created successfully!');
-      navigate('/'); // Redirect to home page after successful sign-up
+      navigate('/'); 
     } catch (error) {
       console.error(error);
       toast.error(`Error: ${error.message}`);
