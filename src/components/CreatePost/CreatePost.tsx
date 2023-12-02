@@ -144,7 +144,13 @@ export default function CreatePost() {
           console.log(imageUrl);
           addUserDataToDatabase(userData, housingData, imageUrl)
             .then(() => {
-              navigate("/album"); 
+              // Check if the user is authenticated before navigating
+              if (auth.currentUser) {
+                navigate("/album");
+              } else {
+                // Redirect to the sign-in page or handle authentication accordingly
+                // Example: navigate("/signin");
+              }
             })
             .catch((error) => {
               console.error(error);
@@ -159,6 +165,7 @@ export default function CreatePost() {
       console.log('Fill out all the boxes!');
     }
   };
+  
   
 
   const handleBack = () => {
