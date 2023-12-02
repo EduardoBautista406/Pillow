@@ -1,15 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import { auth } from "../firebase";
-import CardMedia from '@mui/material/CardMedia';
-import CardContent from '@mui/material/CardContent';
-import Typography from '@mui/material/Typography';
-import CardActions from '@mui/material/CardActions';
-import Button from '@mui/material/Button';
+import Avatar from "@mui/material/Avatar";
+import PersonIcon from '@mui/icons-material/Person';
 import CssBaseline from '@mui/material/CssBaseline';
 import Container from '@mui/material/Container';
 import Paper from '@mui/material/Paper';
-import Avatar from '@mui/material/Avatar';
+import CardContent from '@mui/material/CardContent';
+import Typography from '@mui/material/Typography';
+import CardMedia from '@mui/material/CardMedia';
+import CardActions from '@mui/material/CardActions';
+import Button from '@mui/material/Button';
 import { useNavigate } from 'react-router-dom';
+import PermIdentityIcon from '@mui/icons-material/PermIdentity';
+
 
 function Profile() {
   const [user, setUser] = useState(null);
@@ -25,26 +28,21 @@ function Profile() {
 
   const handleLogout = () => {
     auth.signOut().then(() => {
-      // Redirect to the login page after successful logout
       navigate('/login');
     }).catch((error) => {
       console.error('Logout error:', error);
     });
   };
 
-  // If the user is not logged in, render a loading state or redirect to login
   if (!user) {
     return <div>Loading...</div>;
   }
 
-  // Use user data from authentication state
   const userData = {
     fullName: user.displayName || 'John Doe',
     email: user.email || 'john@example.com',
-    profilePicture: user.photoURL || 'https://source.unsplash.com/random?people',
   };
 
-  // Sample user listings (replace with actual user listings)
   const userListings = [
     { id: 1, title: 'Listing 1', image: 'https://source.unsplash.com/random?wallpapers' },
     { id: 2, title: 'Listing 2', image: 'https://source.unsplash.com/random?wallpapers' },
@@ -59,8 +57,10 @@ function Profile() {
           <Avatar
             alt="User Profile Picture"
             src={userData.profilePicture}
-            sx={{ width: 100, height: 100, marginBottom: '10px' }}
-          />
+            sx={{ width: 100, height: 100, marginBottom: '20px' }}
+          >
+            <PermIdentityIcon sx={{ width: 50, height: 50, marginBottom: '0px' }}  />
+          </Avatar>
         </div>
         <CardContent>
           <Typography variant="h5" gutterBottom>
