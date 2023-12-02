@@ -8,6 +8,7 @@ import Stepper from '@mui/material/Stepper';
 import Step from '@mui/material/Step';
 import StepLabel from '@mui/material/StepLabel';
 import Button from '@mui/material/Button';
+import { ToastContainer, toast } from "react-toastify";
 import Typography from '@mui/material/Typography';
 import UserDetails from './UserDetails';
 import { useNavigate } from 'react-router-dom';
@@ -144,13 +145,8 @@ export default function CreatePost() {
           console.log(imageUrl);
           addUserDataToDatabase(userData, housingData, imageUrl)
             .then(() => {
-              // Check if the user is authenticated before navigating
-              if (auth.currentUser) {
-                navigate("/album");
-              } else {
-                // Redirect to the sign-in page or handle authentication accordingly
-                // Example: navigate("/signin");
-              }
+              toast.success("Listing created successfully!");
+              navigate('/album');
             })
             .catch((error) => {
               console.error(error);
@@ -189,9 +185,6 @@ export default function CreatePost() {
           </Stepper>
           {activeStep === steps.length ? (
             <Fragment>
-              <Typography variant="h5" gutterBottom>
-                Posting successfully submitted
-              </Typography>
             </Fragment>
           ) : (
             <Fragment>
@@ -210,6 +203,7 @@ export default function CreatePost() {
           )}
         </Paper>
       </Container>
+      <ToastContainer position="bottom-right" autoClose={5000} />
     </Fragment>
   );
 }
