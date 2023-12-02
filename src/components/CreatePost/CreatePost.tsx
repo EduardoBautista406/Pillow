@@ -10,6 +10,7 @@ import StepLabel from '@mui/material/StepLabel';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import UserDetails from './UserDetails';
+import { useNavigate } from 'react-router-dom';
 import HousingDetails from './HousingDetails';
 import Review from './Review';
 import { addUserDataToDatabase } from './PostBackend';
@@ -135,12 +136,19 @@ export default function CreatePost() {
     },
   ];
 
+  const navigate = useNavigate();
   const handleNext = () => {
     if (activeStep === steps.length - 1) {
       getAddressImage(housingData.address1)
         .then((imageUrl) => {
-          console.log(imageUrl); // You can use this URL in an <img> tag to display the image
-          addUserDataToDatabase(userData, housingData, imageUrl);
+          console.log(imageUrl);
+          addUserDataToDatabase(userData, housingData, imageUrl)
+            .then(() => {
+              navigate("/album"); 
+            })
+            .catch((error) => {
+              console.error(error);
+            });
         })
         .catch((error) => {
           console.error(error);
@@ -148,9 +156,10 @@ export default function CreatePost() {
     } else if (validations[activeStep]()) {
       setActiveStep(activeStep + 1);
     } else {
-      console.log('fill out all the boxes!');
+      console.log('Fill out all the boxes!');
     }
   };
+  
 
   const handleBack = () => {
     setActiveStep(activeStep - 1);
