@@ -22,13 +22,11 @@ const SignIn = () => {
       .then((userCredential) => {
         console.log(userCredential);
         toast.success("Account created successfully!");
-        // Redirect to a different page upon successful login
-        navigate("/album"); // Replace "/dashboard" with your desired route
+        navigate("/album"); 
       })
       .catch((error) => {
         console.log(error);
-        // Handle errors, e.g., show an error message
-        toast.error(`Error: ${error.message}`); // Replace with your preferred error handling
+        toast.error(`Error: ${error.message}`);
       });
   };
 
