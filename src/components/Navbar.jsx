@@ -4,6 +4,7 @@ import Typography from '@mui/material/Typography';
 import Toolbar from '@mui/material/Toolbar';
 import Button from '@mui/material/Button';
 import Avatar from '@mui/material/Avatar';
+import PermIdentityIcon from '@mui/icons-material/PermIdentity';
 
 export default function Navbar() {
     return (
@@ -15,7 +16,10 @@ export default function Navbar() {
                     </Typography>
                 </Button>
                 <Button href="/prf" color="inherit">
-                    <Avatar alt="Profile" src="C:\Users\vpolk\Pillow\src\assets\png-transparent-profile-logo-computer-icons-user-user-blue-heroes-logo.png" />
+                    <Avatar alt="Profile">
+                        <PermIdentityIcon />
+                    </Avatar>
+                        
                 </Button>
                 
             </Toolbar>
