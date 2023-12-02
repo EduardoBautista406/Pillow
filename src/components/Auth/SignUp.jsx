@@ -63,7 +63,7 @@ const SignUp = () => {
       });
 
       toast.success('Account created successfully!');
-      navigate('/'); // Redirect to home page after successful sign-up
+      navigate('/album'); // Redirect to home page after successful sign-up
     } catch (error) {
       console.error(error);
       toast.error(`Error: ${error.message}`);
