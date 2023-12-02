@@ -10,10 +10,13 @@ import Container from '@mui/material/Container';
 import Paper from '@mui/material/Paper';
 import { getListingById } from './CreatePost/PostBackend';
 import { useParams } from 'react-router-dom';
+import AuthValidation from './Auth/AuthValidation';
 
 export default function DetailView() {
     const { listingId } = useParams();
     const [listing, setListing] = useState(null);
+
+    AuthValidation();
 
     const handleContactClick = () => {
         const emailSubject = `Regarding the listing at ${listing.address}`;

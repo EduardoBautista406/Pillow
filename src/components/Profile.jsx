@@ -26,6 +26,9 @@ function Profile() {
       if (currentUser) {
         fetchUserPosts(currentUser.email);
       }
+      else {
+        navigate('/login');
+      }
     });
 
     return () => unsubscribe();

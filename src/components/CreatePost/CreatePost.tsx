@@ -56,7 +56,7 @@ export default function CreatePost() {
         setUserData({ name: user.displayName || '', email: user.email || '' });
       } else {
         // User is signed out, reset the state
-        setUserData({ name: '', email: '' });
+        navigate('/login');
       }
     });
 
