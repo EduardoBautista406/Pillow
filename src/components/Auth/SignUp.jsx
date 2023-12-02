@@ -5,6 +5,8 @@ import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
+import Select from '@mui/material/Select';
+import MenuItem from '@mui/material/MenuItem';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from 'react-router-dom';
@@ -19,9 +21,23 @@ const SignUp = () => {
   const navigate = useNavigate();
 
   const allGenders = [
-    "Abinary", "Agender", "Ambigender", "Androgyne", "Androgynos", "Androgynous", "Aporagender", "Autigender", "Bakla", "Bigender",
-    // ... (rest of the genders)
-    "Winkte", "Woman of trans experience", "X-gender", "Xenogender"
+    "Abinary", "Agender", "Ambigender", "Androgyne", "Androgynos", "Androgynous", "Aporagender",
+    "Autigender", "Bakla", "Bigender", "Binary", "Bissu", "Butch", "Calabai", "Calalai", "Cis",
+    "Cisgender", "Cis female", "Cis male", "Demi-boy", "Demiflux", "Demigender", "Demi-girl",
+    "Demi-guy", "Demi-man", "Dual gender", "Demi-woman", "Endosex", "Eunuch", "Fa'afafine",
+    "Female", "Female to Male", "Femme", "FTM", "Gender bender", "Gender diverse", "Gender gifted",
+    "Genderfluid", "Genderflux", "Genderfuck", "Genderless", "Gendervague", "Gender nonconforming",
+    "Genderqueer", "Gender questioning", "Gender variant", "Graygender", "Heterosexual", "Hijra",
+    "Intergender", "Intersex", "Kathoey", "Male", "Male to female", "Man of trans experience",
+    "Maverique", "MTF", "Multigender", "Muxe", "Neurogender", "Neutrois", "Non-binary",
+    "Non-binary transgender", "Omnigender", "Other", "Pangender", "Polygender",
+    "Person of transgendered experience", "Queer", "Sekhet", "Straight", "Third gender", "Trans",
+    "Trans female", "Trans male", "Trans man", "Trans person", "Trans woman", "Transgender",
+    "Transgender female", "Transgender male", "Transgender man", "Transgender person",
+    "Transgender woman", "Transfeminine", "Transmasculine", "Transsexual", "Transsexual female",
+    "Transsexual male", "Transsexual man", "Transsexual person", "Transsexual woman", "Travesti",
+    "Trigender", "Tumtum", "Two-spirit", "Vakasalewalewa", "Waria", "Winkte", "Woman of trans experience",
+    "X-gender", "Xenogender"
   ];
 
   const allYears = ["Freshman", "Sophomore", "Junior", "Senior"];
@@ -85,36 +101,34 @@ const SignUp = () => {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
-          <TextField
-            select
+          <Select
             label="Select your gender"
             variant="outlined"
             margin="normal"
             value={gender}
             onChange={(e) => setGender(e.target.value)}
-            sx={{ width: '19%' }}
+            style={{ width: '19%', marginTop: '15px'}}
           >
             {allGenders.map((g) => (
-              <option key={g} value={g}>
+              <MenuItem key={g} value={g}>
                 {g}
-              </option>
+              </MenuItem>
             ))}
-          </TextField>
-          <TextField
-            select
+          </Select>
+          <Select
             label="Select your year"
             variant="outlined"
             margin="normal"
             value={year}
             onChange={(e) => setYear(e.target.value)}
-            sx={{ width: '19%' }}
+            style={{ width: '19%', marginTop: '19px'}}
           >
             {allYears.map((y) => (
-              <option key={y} value={y}>
+              <MenuItem key={y} value={y}>
                 {y}
-              </option>
+              </MenuItem>
             ))}
-          </TextField>
+          </Select>
           <Button type="submit" variant="contained" color="primary" style={{ marginTop: '20px' }}>
             Sign Up
           </Button>
