@@ -118,8 +118,7 @@ export default function Album() {
           </Grid>
         </Container>
       </main>
-      {/* Footer */}
-      <Box sx={{ bgcolor: 'background.paper', p: 6 }} component="footer">
+      {/* <Box sx={{ bgcolor: 'background.paper', p: 6 }} component="footer">
         <Typography variant="h6" align="center" gutterBottom>
           Footer
         </Typography>
@@ -131,8 +130,7 @@ export default function Album() {
         >
           Something here to give the footer a purpose!
         </Typography>
-      </Box>
-      {/* End footer */}
+      </Box> */}
     </ThemeProvider>
   );
 }

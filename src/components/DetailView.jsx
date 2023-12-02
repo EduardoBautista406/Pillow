@@ -75,7 +75,7 @@ export default function DetailView() {
                             </Typography>
                         </CardContent>
                         <CardActions>
-                            <Button variant="contained" onClick={handleContactClick}>
+                            <Button variant="contained" href='profile'>
                                 Contact
                             </Button>
                         </CardActions>

@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { auth } from "../firebase";
-import Avatar from "@mui/material/Avatar";
-import PersonIcon from '@mui/icons-material/Person';
+import { auth, db } from '../firebase'; // Assuming you have a 'db' object for database operations
+import Avatar from '@mui/material/Avatar';
+import PermIdentityIcon from '@mui/icons-material/PermIdentity';
 import CssBaseline from '@mui/material/CssBaseline';
 import Container from '@mui/material/Container';
+import { doc, getDocs, collection, deleteDoc } from 'firebase/firestore'; // Updated import
 import Paper from '@mui/material/Paper';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
@@ -11,27 +12,65 @@ import CardMedia from '@mui/material/CardMedia';
 import CardActions from '@mui/material/CardActions';
 import Button from '@mui/material/Button';
 import { useNavigate } from 'react-router-dom';
-import PermIdentityIcon from '@mui/icons-material/PermIdentity';
-
 
 function Profile() {
   const [user, setUser] = useState(null);
+  const [userPosts, setUserPosts] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((currentUser) => {
       setUser(currentUser);
+
+      // Fetch user-specific posts when the user is available
+      if (currentUser) {
+        fetchUserPosts(currentUser.email);
+      }
     });
 
     return () => unsubscribe();
   }, []);
 
   const handleLogout = () => {
-    auth.signOut().then(() => {
-      navigate('/login');
-    }).catch((error) => {
-      console.error('Logout error:', error);
-    });
+    auth
+      .signOut()
+      .then(() => {
+        navigate('/login');
+      })
+      .catch((error) => {
+        console.error('Logout error:', error);
+      });
+  };
+
+  const handleDelete = async (postId) => {
+    try {
+      // Delete from the database using new syntax
+      await deleteDoc(doc(db, 'listings', postId));
+
+      // Remove from the UI
+      setUserPosts((prevPosts) => prevPosts.filter((post) => post.id !== postId));
+    } catch (error) {
+      console.error('Error deleting post:', error);
+    }
+  };
+
+  const fetchUserPosts = async (userEmail) => {
+    try {
+      const querySnapshot = await getDocs(collection(db, 'listings'));
+      const posts = [];
+
+      querySnapshot.forEach((doc) => {
+        const listingUserEmail = doc.data().user; // Assuming 'user' field in the listings collection
+        // Compare with 'email' field in the User collection
+        if (listingUserEmail === userEmail) {
+          posts.push({ id: doc.id, ...doc.data() });
+        }
+      });
+
+      setUserPosts(posts);
+    } catch (error) {
+      console.error('Error fetching user posts:', error);
+    }
   };
 
   if (!user) {
@@ -43,12 +82,6 @@ function Profile() {
     email: user.email || 'john@example.com',
   };
 
-  const userListings = [
-    { id: 1, title: 'Listing 1', image: 'https://source.unsplash.com/random?wallpapers' },
-    { id: 2, title: 'Listing 2', image: 'https://source.unsplash.com/random?wallpapers' },
-    { id: 3, title: 'Listing 3', image: 'https://source.unsplash.com/random?wallpapers' },
-  ];
-
   return (
     <Container component="main" maxWidth="sm">
       <CssBaseline />
@@ -59,7 +92,7 @@ function Profile() {
             src={userData.profilePicture}
             sx={{ width: 100, height: 100, marginBottom: '20px' }}
           >
-            <PermIdentityIcon sx={{ width: 50, height: 50, marginBottom: '0px' }}  />
+            <PermIdentityIcon sx={{ width: 50, height: 50, marginBottom: '0px' }} />
           </Avatar>
         </div>
         <CardContent>
@@ -75,13 +108,16 @@ function Profile() {
         <Typography variant="h6" gutterBottom>
           User Listings
         </Typography>
-        {userListings.map((listing) => (
-          <Paper key={listing.id} elevation={3} style={{ padding: '10px', marginBottom: '10px' }}>
-            <CardMedia component="img" alt={`Listing ${listing.id}`} height="150" image={listing.image} />
-            <Typography variant="subtitle1">{listing.title}</Typography>
-            <CardActions>
-              <Button size="small" variant="outlined" color="primary">
-                View Listing
+        {userPosts.map((post) => (
+          <Paper key={post.id} elevation={3} style={{ padding: '10px', marginBottom: '10px' }}>
+            <CardMedia component="img" alt={`Post ${post.id}`} height="150" image={post.image} />
+            <Typography variant="subtitle1">{post.title}</Typography>
+            <CardActions style={{ justifyContent: 'space-between' }}>
+              <Button href={`/detail/${post.id}`} size="small" variant="outlined" color="primary">
+                View Post
+              </Button>
+              <Button size="small" variant="outlined" color="error" onClick={() => handleDelete(post.id)}>
+                Delete
               </Button>
             </CardActions>
           </Paper>

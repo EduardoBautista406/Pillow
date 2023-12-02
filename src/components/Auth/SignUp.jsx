@@ -1,19 +1,30 @@
 import React, { useState } from 'react';
 import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
-import { auth } from '../../firebase';
+import { auth, db } from '../../firebase';
 import Paper from '@mui/material/Paper';
-import { useNavigate } from 'react-router-dom';
 import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useNavigate } from 'react-router-dom';
+import { doc, setDoc } from 'firebase/firestore';
 
 const SignUp = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [name, setName] = useState('');
+  const [gender, setGender] = useState('');
+  const [year, setYear] = useState('');
   const navigate = useNavigate();
+
+  const allGenders = [
+    "Abinary", "Agender", "Ambigender", "Androgyne", "Androgynos", "Androgynous", "Aporagender", "Autigender", "Bakla", "Bigender",
+    // ... (rest of the genders)
+    "Winkte", "Woman of trans experience", "X-gender", "Xenogender"
+  ];
+
+  const allYears = ["Freshman", "Sophomore", "Junior", "Senior"];
 
   const signUp = async (e) => {
     e.preventDefault();
@@ -24,6 +35,16 @@ const SignUp = () => {
 
       // Update user display name
       await updateProfile(userCredential.user, { displayName: name });
+
+      // Add user data to Firestore
+      const userDocRef = doc(db, 'User', userCredential.user.uid);
+      await setDoc(userDocRef, {
+        name,
+        email,
+        gender,
+        year,
+        // Add other fields as needed
+      });
 
       toast.success('Account created successfully!');
       navigate('/'); // Redirect to home page after successful sign-up
@@ -64,6 +85,36 @@ const SignUp = () => {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
+          <TextField
+            select
+            label="Select your gender"
+            variant="outlined"
+            margin="normal"
+            value={gender}
+            onChange={(e) => setGender(e.target.value)}
+            sx={{ width: '19%' }}
+          >
+            {allGenders.map((g) => (
+              <option key={g} value={g}>
+                {g}
+              </option>
+            ))}
+          </TextField>
+          <TextField
+            select
+            label="Select your year"
+            variant="outlined"
+            margin="normal"
+            value={year}
+            onChange={(e) => setYear(e.target.value)}
+            sx={{ width: '19%' }}
+          >
+            {allYears.map((y) => (
+              <option key={y} value={y}>
+                {y}
+              </option>
+            ))}
+          </TextField>
           <Button type="submit" variant="contained" color="primary" style={{ marginTop: '20px' }}>
             Sign Up
           </Button>
