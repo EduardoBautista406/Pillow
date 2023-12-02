@@ -40,16 +40,16 @@ export default function ProfileScreen() {
       const ListingsData = await getDocs(ListingsCollection);
       const profileData = await getDocs(profileCollection);
       
-      //fetches the profile picture from the database  
+       
         let xhr = new XMLHttpRequest();
         xhr.responseType = 'text';
         xhr.open('GET', docSnap.data().profilePic);
         xhr.send();
         xhr.onload = function(event) {
           if (xhr.status != 200) {
-            // analyze HTTP status of the response
+            
             console.log(`Error ${xhr.status}: ${xhr.statusText}`);
-          } else { // show the result
+          } else { 
             console.log(`Received ${event.loaded} bytes`);
             setProfileImage(xhr.response);
           }
@@ -84,7 +84,7 @@ export default function ProfileScreen() {
     //   });
 
 
-      //map name to reviews based on user id in the profile collection
+      
       filteredListingsData.forEach((review) => {
         const profile = profileData.docs.find((profile) => profile.id === review.user);
         review.userName = profile ? profile.data().name : "Unknown User";

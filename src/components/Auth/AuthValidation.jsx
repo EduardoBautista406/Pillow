@@ -8,7 +8,7 @@ const AuthValidation = () => {
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(user => {
       if (!user) {
-        navigate("/login"); // If there is no user, redirect to "/login" page.
+        navigate("/login"); 
       }
     });
     return unsubscribe;

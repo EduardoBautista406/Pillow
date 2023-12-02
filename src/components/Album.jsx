@@ -17,7 +17,7 @@ import { getListingDataFromDatabase, sortByDate } from './CreatePost/PostBackend
 import AuthValidation from './Auth/AuthValidation';
 
 
-// TODO remove, this demo shouldn't need to reset the theme.
+
 const defaultTheme = createTheme();
 
 export default function Album() {

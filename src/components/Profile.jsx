@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { auth, db } from '../firebase'; // Assuming you have a 'db' object for database operations
+import { auth, db } from '../firebase'; 
 import Avatar from '@mui/material/Avatar';
 import PermIdentityIcon from '@mui/icons-material/PermIdentity';
 import CssBaseline from '@mui/material/CssBaseline';
 import Container from '@mui/material/Container';
-import { doc, getDocs, collection, deleteDoc } from 'firebase/firestore'; // Updated import
+import { doc, getDocs, collection, deleteDoc } from 'firebase/firestore'; 
 import Paper from '@mui/material/Paper';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
@@ -22,7 +22,7 @@ function Profile() {
     const unsubscribe = auth.onAuthStateChanged((currentUser) => {
       setUser(currentUser);
 
-      // Fetch user-specific posts when the user is available
+      
       if (currentUser) {
         fetchUserPosts(currentUser.email);
       }
@@ -47,10 +47,10 @@ function Profile() {
 
   const handleDelete = async (postId) => {
     try {
-      // Delete from the database using new syntax
+      
       await deleteDoc(doc(db, 'listings', postId));
 
-      // Remove from the UI
+      
       setUserPosts((prevPosts) => prevPosts.filter((post) => post.id !== postId));
     } catch (error) {
       console.error('Error deleting post:', error);
@@ -63,8 +63,7 @@ function Profile() {
       const posts = [];
 
       querySnapshot.forEach((doc) => {
-        const listingUserEmail = doc.data().user; // Assuming 'user' field in the listings collection
-        // Compare with 'email' field in the User collection
+        const listingUserEmail = doc.data().user; 
         if (listingUserEmail === userEmail) {
           posts.push({ id: doc.id, ...doc.data() });
         }
