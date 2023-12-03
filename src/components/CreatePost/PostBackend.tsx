@@ -77,6 +77,14 @@ export async function getListingDataFromDatabase() {
     });
   }
 
+  export function sortByPriceAscending(listingData) {
+    return [...listingData].sort((a, b) => a.price - b.price);
+  }
+
+  export function sortByPriceDescending(listingData) {
+    return [...listingData].sort((a, b) => b.price - a.price);
+  }
+
   export async function getAddressImage(address) {
     const GEOCODING_ENDPOINT = `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(address)}&key=${MAPS_API_KEY}`;
   
