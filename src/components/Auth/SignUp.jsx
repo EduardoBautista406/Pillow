@@ -7,6 +7,7 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
+import InputLabel from '@mui/material/InputLabel';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from 'react-router-dom';
@@ -101,13 +102,16 @@ const SignUp = () => {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
+          <InputLabel htmlFor="gender" style={{ marginTop: '15px' }}>
+            Select Gender
+          </InputLabel>
           <Select
-            label="Select your gender"
+            id="gender"
             variant="outlined"
             margin="normal"
             value={gender}
             onChange={(e) => setGender(e.target.value)}
-            style={{ width: '19%', marginTop: '15px'}}
+            style={{ width: '19%', marginTop: '5px'}}
           >
             {allGenders.map((g) => (
               <MenuItem key={g} value={g}>
@@ -115,13 +119,16 @@ const SignUp = () => {
               </MenuItem>
             ))}
           </Select>
+          <InputLabel htmlFor="year" style={{ marginTop: '19px' }}>
+            Select your year
+          </InputLabel>
           <Select
-            label="Select your year"
+            id="year"
             variant="outlined"
             margin="normal"
             value={year}
             onChange={(e) => setYear(e.target.value)}
-            style={{ width: '19%', marginTop: '19px'}}
+            style={{ width: '19%', marginTop: '5px'}}
           >
             {allYears.map((y) => (
               <MenuItem key={y} value={y}>
