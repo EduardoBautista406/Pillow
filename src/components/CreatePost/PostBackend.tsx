@@ -54,6 +54,38 @@ export async function getListingDataFromDatabase() {
     }
   }
 
+  export const getTimeAgo = (timestamp) => {
+    const now = new Date().getTime();
+    const then = timestamp.toMillis();
+    const seconds = Math.floor((now - then) / 1000);
+    if (seconds < 60) {
+      return seconds + 's ago';
+    }
+  
+    const minutes = Math.floor(seconds / 60);
+    if (minutes < 60) {
+      return minutes + 'min ago';
+    }
+  
+    const hours = Math.floor(minutes / 60);
+    if (hours < 24) {
+      return hours + 'h ago';
+    }
+  
+    const days = Math.floor(hours / 24);
+    if (days < 31) {
+      return days + 'd ago';
+    }
+  
+    const months = Math.floor(days / 30);
+    if (months < 12) {
+      return months + 'mon ago';
+    }
+  
+    const years = Math.floor(months / 12);
+    return years + 'y ago';
+  }
+
   export function sortByDate(listingData) {
     return listingData.sort(function(a, b) {
       var aSeconds = a.date.seconds;
@@ -77,6 +109,14 @@ export async function getListingDataFromDatabase() {
     });
   }
 
+  export function sortByPriceAscending(listingData) {
+    return [...listingData].sort((a, b) => a.price - b.price);
+  }
+
+  export function sortByPriceDescending(listingData) {
+    return [...listingData].sort((a, b) => b.price - a.price);
+  }
+
   export async function getAddressImage(address) {
     const GEOCODING_ENDPOINT = `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(address)}&key=${MAPS_API_KEY}`;
   
@@ -94,24 +134,3 @@ export async function getListingDataFromDatabase() {
       throw new Error("Unable to retrieve image for the given address.");
     }
   }
-
-/*
-    try {
-        const response = await fetch('https://your-api-endpoint.com/addUser', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(userData)
-        });
-
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
-        }
-
-        const data = await response.json();
-        return data;
-    } catch (error) {
-        console.error('There was a problem with the fetch operation:', error.message);
-    }
-    */

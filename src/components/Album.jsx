@@ -13,14 +13,16 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { getListingDataFromDatabase, sortByDate } from './CreatePost/PostBackend';
+import { getListingDataFromDatabase, getTimeAgo, sortByDate, sortByPriceAscending, sortByPriceDescending } from './CreatePost/PostBackend';
 import AuthValidation from './Auth/AuthValidation';
+import { HandymanOutlined } from '@mui/icons-material';
 
 
 
 const defaultTheme = createTheme();
 
 export default function Album() {
+  const [sortType, setSortType] = useState(1);
   const [listingList, setListingList] = useState([]);
   
   AuthValidation();
@@ -28,6 +30,28 @@ export default function Album() {
   useEffect(() => {
     fetchListings();
   }, []);
+
+  const handleSortToggle = () => {
+    if (sortType < 2) {
+      setSortType(sortType + 1);
+    } else {
+      setSortType(0);
+    }
+    switch (sortType) {
+      case 0:
+        setListingList(sortByDate(listingList));
+        break;
+      case 1:
+        setListingList(sortByPriceAscending(listingList));
+        break;
+      case 2:
+        setListingList(sortByPriceDescending(listingList));
+        break;
+      default:
+        break;
+    }
+    console.log(sortType);
+  }
 
   const fetchListings = async () => {
     try {
@@ -74,7 +98,7 @@ export default function Album() {
               justifyContent="center"
             >
               <Button variant="contained" href='create'>Create Post</Button>
-              <Button variant="outlined">Sort by</Button>
+              <Button variant="outlined" onClick={handleSortToggle}>{sortType === 1 ? 'Sort by Date' : sortType === 0 ? 'Sort Price Descending' : 'Sort by Price Ascending'}</Button>
             </Stack>
           </Container>
         </Box>
@@ -104,14 +128,24 @@ export default function Album() {
                       {listingList.address}
                     </Typography>
                     <Typography fontWeight={'light'} >
-                      {listingList.bedrooms} beds, {listingList.bathrooms} bathrooms
+                      {listingList.bedrooms} bd | {listingList.bathrooms} ba | {listingList.sqft} sqft
                     </Typography>
                     <Typography fontWeight={'light'}>
                       {listingList.preferences}
                     </Typography>
-                    <Typography fontWeight={'500'}>
-                      ${listingList.price} / month
-                    </Typography>
+                    <Grid container spacing={2}>
+                      <Grid item xs={6}>
+                        <Typography fontWeight={'500'}>
+                        ${listingList.price} / mo
+                        </Typography>
+                        
+                      </Grid>
+                      <Grid item xs={6} sx={{ textAlign: 'right'}}>
+                        <Typography fontWeight={'light'} style={{ fontSize:'12px'}}>
+                          {getTimeAgo(listingList.date)}
+                        </Typography>
+                      </Grid>
+                    </Grid>
                   </CardContent>
                   <CardActions>
                     <Button size="small" href={`/detail/${listingList.id}`}>View</Button>
