@@ -13,7 +13,7 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { getListingDataFromDatabase, sortByDate, sortByPriceAscending, sortByPriceDescending } from './CreatePost/PostBackend';
+import { getListingDataFromDatabase, getTimeAgo, sortByDate, sortByPriceAscending, sortByPriceDescending } from './CreatePost/PostBackend';
 import AuthValidation from './Auth/AuthValidation';
 import { HandymanOutlined } from '@mui/icons-material';
 
@@ -128,14 +128,24 @@ export default function Album() {
                       {listingList.address}
                     </Typography>
                     <Typography fontWeight={'light'} >
-                      {listingList.bedrooms} beds, {listingList.bathrooms} bathrooms
+                      {listingList.bedrooms} bd | {listingList.bathrooms} ba | {listingList.sqft} sqft
                     </Typography>
                     <Typography fontWeight={'light'}>
                       {listingList.preferences}
                     </Typography>
-                    <Typography fontWeight={'500'}>
-                      ${listingList.price} / month
-                    </Typography>
+                    <Grid container spacing={2}>
+                      <Grid item xs={6}>
+                        <Typography fontWeight={'500'}>
+                        ${listingList.price} / mo
+                        </Typography>
+                        
+                      </Grid>
+                      <Grid item xs={6} sx={{ textAlign: 'right'}}>
+                        <Typography fontWeight={'light'} style={{ fontSize:'12px'}}>
+                          {getTimeAgo(listingList.date)}
+                        </Typography>
+                      </Grid>
+                    </Grid>
                   </CardContent>
                   <CardActions>
                     <Button size="small" href={`/detail/${listingList.id}`}>View</Button>
