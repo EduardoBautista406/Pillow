@@ -54,14 +54,14 @@ const HousingDetails = ({ data, setData, errors }) => {
         }));
     };
     const handleGenderChange = (e) => {
-        setData(prevData => ({ 
-            ...prevData, 
-            gender: e.target.value as string 
+        setData(prevData => ({
+            ...prevData,
+            gender: e.target.value as string
         }));
     };
     const handleReviewChange = (e) => {
-        setData(prevData => ({ 
-            ...prevData, 
+        setData(prevData => ({
+            ...prevData,
             review: e.target.value
         }));
     };
@@ -191,14 +191,14 @@ const HousingDetails = ({ data, setData, errors }) => {
             </Typography>
             <Grid container spacing={3}>
                 <Grid item xs={12}>
-                    <AutocompleteTextField 
+                    <AutocompleteTextField
                         id="address1"
                         name="address1"
                         label="Address line 1 *"
                         fullWidth
                         variant="standard"
                         onChange={handleAddress1Change}
-                        onPlaceSelected={handlePlaceSelected} 
+                        onPlaceSelected={handlePlaceSelected}
                         value={data.address1 || ''}
                         error={errors.address1}
                     />
@@ -223,6 +223,7 @@ const HousingDetails = ({ data, setData, errors }) => {
                         label="Price"
                         fullWidth
                         variant="standard"
+                        type="number"
                         value={data.price || ''}
                         onChange={handlePriceChange}
                         error={errors.price}
@@ -236,6 +237,7 @@ const HousingDetails = ({ data, setData, errors }) => {
                         label="Sqft"
                         fullWidth
                         variant="standard"
+                        type="number"
                         value={data.sqft || ''}
                         onChange={handleSqftChange}
                         error={errors.sqft}
@@ -243,69 +245,69 @@ const HousingDetails = ({ data, setData, errors }) => {
                     {errors.sqft && <Typography color="error">{errors.sqft}</Typography>}
                 </Grid>
                 <Grid item xs={4}>
-                <FormControl variant="standard" required fullWidth>
+                    <FormControl variant="standard" required fullWidth>
                         <InputLabel id="beds">Beds</InputLabel>
-                            <Select
-                                labelId="beds"
-                                id="beds"
-                                value={data.beds || ''}
-                                onChange={handleBedroomChange}
-                                label="Beds"
-                                >
-                                    <MenuItem value={0}>0</MenuItem>
-                                    <MenuItem value={1}>1</MenuItem>
-                                    <MenuItem value={2}>2</MenuItem>
-                                    <MenuItem value={3}>3</MenuItem>
-                                    <MenuItem value={4}>4</MenuItem>
-                                    <MenuItem value={5}>5</MenuItem>
-                                    <MenuItem value={6}>6</MenuItem>
-                                    <MenuItem value={7}>7</MenuItem>
-                                    <MenuItem value={8}>8</MenuItem>
-                                    <MenuItem value={9}>9</MenuItem>
-                                    <MenuItem value={10}>10</MenuItem>
-                            </Select>
-                            {errors.beds && <Typography color="error">{errors.beds}</Typography>}
+                        <Select
+                            labelId="beds"
+                            id="beds"
+                            value={data.beds || ''}
+                            onChange={handleBedroomChange}
+                            label="Beds"
+                        >
+                            <MenuItem value={0}>0</MenuItem>
+                            <MenuItem value={1}>1</MenuItem>
+                            <MenuItem value={2}>2</MenuItem>
+                            <MenuItem value={3}>3</MenuItem>
+                            <MenuItem value={4}>4</MenuItem>
+                            <MenuItem value={5}>5</MenuItem>
+                            <MenuItem value={6}>6</MenuItem>
+                            <MenuItem value={7}>7</MenuItem>
+                            <MenuItem value={8}>8</MenuItem>
+                            <MenuItem value={9}>9</MenuItem>
+                            <MenuItem value={10}>10</MenuItem>
+                        </Select>
+                        {errors.beds && <Typography color="error">{errors.beds}</Typography>}
                     </FormControl>
                 </Grid>
                 <Grid item xs={4}>
-                <FormControl variant="standard" required fullWidth>
+                    <FormControl variant="standard" required fullWidth>
                         <InputLabel id="baths">Baths</InputLabel>
-                            <Select
-                                labelId="baths"
-                                id="baths"
-                                value={data.baths || ''}
-                                onChange={handleBathroomChange}
-                                label="Baths"
-                                >
-                                    <MenuItem value={0}>0</MenuItem>
-                                    <MenuItem value={1}>1</MenuItem>
-                                    <MenuItem value={2}>2</MenuItem>
-                                    <MenuItem value={3}>3</MenuItem>
-                                    <MenuItem value={4}>4</MenuItem>
-                                    <MenuItem value={5}>5</MenuItem>
-                                    <MenuItem value={6}>6</MenuItem>
-                                    <MenuItem value={7}>7</MenuItem>
-                                    <MenuItem value={8}>8</MenuItem>
-                                    <MenuItem value={9}>9</MenuItem>
-                                    <MenuItem value={10}>10</MenuItem>
-                            </Select>
-                            {errors.baths && <Typography color="error">{errors.baths}</Typography>}
+                        <Select
+                            labelId="baths"
+                            id="baths"
+                            value={data.baths || ''}
+                            onChange={handleBathroomChange}
+                            label="Baths"
+                        >
+                            <MenuItem value={0}>0</MenuItem>
+                            <MenuItem value={1}>1</MenuItem>
+                            <MenuItem value={2}>2</MenuItem>
+                            <MenuItem value={3}>3</MenuItem>
+                            <MenuItem value={4}>4</MenuItem>
+                            <MenuItem value={5}>5</MenuItem>
+                            <MenuItem value={6}>6</MenuItem>
+                            <MenuItem value={7}>7</MenuItem>
+                            <MenuItem value={8}>8</MenuItem>
+                            <MenuItem value={9}>9</MenuItem>
+                            <MenuItem value={10}>10</MenuItem>
+                        </Select>
+                        {errors.baths && <Typography color="error">{errors.baths}</Typography>}
                     </FormControl>
                 </Grid>
                 <Grid item xs={4}>
                     <FormControl variant="standard" required fullWidth>
                         <InputLabel id="gender">Gender</InputLabel>
-                            <Select
+                        <Select
                             labelId="gender"
                             id="gender"
                             value={data.gender || ''}
                             onChange={handleGenderChange}
                             label="Gender"
-                            >
-                                {oldGenderOptions}
-                                {newGenderOptions}
-                            </Select>
-                            {errors.gender && <Typography color="error">{errors.gender}</Typography>}
+                        >
+                            {oldGenderOptions}
+                            {newGenderOptions}
+                        </Select>
+                        {errors.gender && <Typography color="error">{errors.gender}</Typography>}
                     </FormControl>
                 </Grid>
                 <Grid item xs={12}>
